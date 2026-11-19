@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.esm.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node10",
+    "outDir": "dist/cjs",
+    "verbatimModuleSyntax": false,
+    "paths": {
+      "@x402/fetch": ["./node_modules/@x402/fetch/dist/cjs/index.d.ts"],
+      "@x402/evm/exact/client": ["./node_modules/@x402/evm/dist/cjs/exact/client/index.d.ts"],
+      "@x402/core/*": ["./node_modules/@x402/core/dist/cjs/*/index.d.ts"]
+    }
+  }
+}

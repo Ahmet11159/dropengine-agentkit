@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - name: Load both module formats
+        run: |
+          node -e "const m = require('./dist/cjs/index.js'); if (typeof m.dropengineActionProvider !== 'function') process.exit(1)"
+          node --input-type=module -e "const m = await import('./dist/esm/index.js'); if (typeof m.dropengineActionProvider !== 'function') process.exit(1)"

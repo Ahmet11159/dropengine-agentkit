@@ -1,0 +1,72 @@
+{
+  "name": "dropengine-agentkit",
+  "version": "0.1.0",
+  "description": "Coinbase AgentKit action provider for DropEngine crypto due-diligence tools: whale activity, transaction simulation, token security audit, wallet risk and a pre-action gate. Paid per call from the agent's own wallet with x402 (USDC on Base).",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && printf '{\"type\":\"commonjs\"}\\n' > dist/cjs/package.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "keywords": [
+    "agentkit",
+    "coinbase-agentkit",
+    "action-provider",
+    "ai-agents",
+    "x402",
+    "crypto",
+    "whale-tracking",
+    "transaction-simulation",
+    "token-security",
+    "base"
+  ],
+  "homepage": "https://github.com/Ahmet11159/dropengine-agentkit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahmet11159/dropengine-agentkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ahmet11159/dropengine-agentkit/issues"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@coinbase/agentkit": ">=0.10.0 <1.0.0",
+    "zod": "^3.23.8"
+  },
+  "dependencies": {
+    "@x402/evm": "^2.31.0",
+    "@x402/fetch": "^2.31.0"
+  },
+  "devDependencies": {
+    "@coinbase/agentkit": "0.10.4",
+    "@types/node": "^22.18.6",
+    "typescript": "^5.9.2",
+    "viem": "2.38.3",
+    "vitest": "^4.1.11",
+    "zod": "^3.25.76"
+  }
+}
